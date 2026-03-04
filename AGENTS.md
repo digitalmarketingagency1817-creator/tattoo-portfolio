@@ -1,4 +1,4 @@
-# AGENTS.md — Next.js Fullstack Template
+# AGENTS.md — tattoo-portfolio
 
 Guidelines for AI agents working on this codebase.
 
