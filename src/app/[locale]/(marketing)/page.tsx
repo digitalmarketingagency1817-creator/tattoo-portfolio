@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
+import { getLocale } from "next-intl/server";
+import { HeroSection } from "@/components/marketing/hero-section";
+import { GalleryPreview } from "@/components/marketing/gallery-preview";
+import { featuredWorks } from "@/data/mock-works";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("HomePage");
@@ -12,20 +14,28 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const t = await getTranslations("HomePage");
+  const t = await getTranslations();
+  const locale = (await getLocale()) as "en" | "sr";
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center py-24">
-      <h1 className="text-4xl font-bold">{t("title")}</h1>
-      <p className="text-muted-foreground mt-4">{t("description")}</p>
-      <div className="mt-8 flex items-center gap-3">
-        <Button asChild>
-          <Link href="/dashboard">{t("dashboardCta")}</Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href="/sign-in">{t("signInCta")}</Link>
-        </Button>
-      </div>
-    </div>
+    <>
+      <HeroSection
+        studioName={t("Studio.name")}
+        tagline={t("HomePage.heroTagline")}
+        ctaLabel={t("HomePage.heroCta")}
+        bookLabel={t("HomePage.heroBook")}
+        ctaHref="/gallery"
+        bookHref="/contact"
+      />
+
+      <GalleryPreview
+        works={featuredWorks}
+        ctaLabel={t("HomePage.galleryCta")}
+        ctaHref="/gallery"
+        sectionTitle={t("HomePage.galleryTitle")}
+        sectionSubtitle={t("HomePage.gallerySubtitle")}
+        locale={locale}
+      />
+    </>
   );
 }
