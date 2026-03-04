@@ -1,26 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Syne } from "next/font/google";
 import { getLocale } from "next-intl/server";
-import { APP_NAME, APP_DESCRIPTION } from "@/lib/constants";
 import { Providers } from "@/components/providers";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
+  variable: "--font-cormorant",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const syne = Syne({
   subsets: ["latin"],
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: APP_NAME,
-    template: `%s | ${APP_NAME}`,
+    default: "Shadow Ink Studio | Belgrade Tattoo Art",
+    template: "%s | Shadow Ink Studio",
   },
-  description: APP_DESCRIPTION,
+  description:
+    "Shadow Ink Studio — fine art tattooing in Belgrade. Blackwork, fine line, traditional, realism, and watercolor.",
 };
 
 export default async function RootLayout({
@@ -32,7 +35,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${cormorant.variable} ${syne.variable} antialiased`}>
         <Providers>{children}</Providers>
       </body>
     </html>
