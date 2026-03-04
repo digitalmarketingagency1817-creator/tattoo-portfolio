@@ -19,7 +19,6 @@ model User {
 
   sessions Session[]
   accounts Account[]
-  posts    Post[]
 }
 
 model Session {
@@ -60,19 +59,4 @@ model Verification {
   expiresAt  DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-}
-
-// ===== App-specific tables =====
-model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   String
-  imageUrl  String?
-  authorId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-
-  @@index([authorId])
 }

@@ -4,5 +4,4 @@ export type {
   Session,
   Account,
   Verification,
-  Post,
 } from "@/generated/prisma";
